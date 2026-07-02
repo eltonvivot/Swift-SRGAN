@@ -1,0 +1,51 @@
+# Training outputs
+runs/
+weights/*.pth
+weights/*.pt
+
+# Datasets (large; download or prepare locally)
+datasets/general/
+datasets/compound/
+datasets/personalized/train/
+datasets/personalized/valid/
+datasets/**/_downloads/
+datasets/**/*.zip
+datasets/**/*.tar
+
+# Legacy upstream default when running train.py without --train-dir
+swift-srgan/dataset/
+
+# Keep personalized source folder structure, ignore image files
+datasets/personalized/source/**/*
+!datasets/personalized/source/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Checkpoints and temp writes
+*.pth.tar.tmp
+*.pth.tmp
+*.tmp
+
+# Legacy validation image naming (pre-fix)
+resultsepoch_*.png
+
+# Jupyter / IDE
+.ipynb_checkpoints/
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,11 +1,11 @@
 import torch
 from torch import nn
-from torchvision.models import mobilenet_v2
+from torchvision.models import MobileNet_V2_Weights, mobilenet_v2
 
 class GeneratorLoss(nn.Module):
     def __init__(self):
         super(GeneratorLoss, self).__init__()
-        vgg = mobilenet_v2(pretrained=True)
+        vgg = mobilenet_v2(weights=MobileNet_V2_Weights.DEFAULT)
         loss_network = nn.Sequential(*list(vgg.features)).eval()
         for param in loss_network.parameters():
             param.requires_grad = False

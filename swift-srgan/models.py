@@ -1,4 +1,5 @@
 import torch
+import math
 from torch import nn
 
 
@@ -89,6 +90,11 @@ class Generator(nn.Module):
 
     def __init__(self, in_channels: int = 3, num_channels: int = 64, num_blocks: int = 16, upscale_factor: int = 4):
         super(Generator, self).__init__()
+
+        if upscale_factor not in (2, 4, 8):
+            raise ValueError(f"upscale_factor must be one of (2, 4, 8), got {upscale_factor}")
+
+        num_upsample_blocks = int(math.log2(upscale_factor))
         
         self.initial = ConvBlock(in_channels, num_channels, kernel_size=9, stride=1, padding=4, use_bn=False)
         self.residual = nn.Sequential(
@@ -96,7 +102,7 @@ class Generator(nn.Module):
         )
         self.convblock = ConvBlock(num_channels, num_channels, kernel_size=3, stride=1, padding=1, use_act=False)
         self.upsampler = nn.Sequential(
-            *[UpsampleBlock(num_channels, scale_factor=2) for _ in range(upscale_factor//2)]
+            *[UpsampleBlock(num_channels, scale_factor=2) for _ in range(num_upsample_blocks)]
         )
         self.final_conv = SeperableConv2d(num_channels, in_channels, kernel_size=9, stride=1, padding=4)
         
