@@ -4,10 +4,6 @@ Fork of [**Swift-SRGAN**](https://github.com/Koushik0901/Swift-SRGAN) — *Rethi
 
 This fork extends the original training code with **multi-dataset automation**, **resume support**, **2x / 4x / 8x weight naming**, and **disk cleanup** after training.
 
-<p align="center">
-  <img src="https://github.com/Koushik0901/Swift-SRGAN/blob/master/image-samples/SwiftSRGAN-architecture.png" width="850" alt="Swift-SRGAN architecture" />
-</p>
-
 ## What changed in this fork
 
 | Area | Original | This fork |
@@ -31,8 +27,7 @@ Swift-SRGAN/
 │   ├── models.py
 │   ├── data.py
 │   ├── loss.py
-│   ├── metric.py
-│   └── optimize-graph.py # legacy TorchScript export (see note below)
+│   └── metric.py
 ├── datasets/
 │   ├── general/          # DF2K → train/ valid/
 │   ├── personalized/
@@ -178,30 +173,9 @@ python train.py \
 
 ---
 
-### `optimize-graph.py` — legacy / likely unused
-
-Original script to export the generator to **TorchScript** (`.pt`). It predates the multi-scale fork changes:
-
-- Expects old checkpoint paths (e.g. `./checkpoints/netG_4x_epoch100.pth.tar`)
-- Does not pass `upscale_factor` explicitly (defaults to 4x)
-- **Not used** by the training pipeline or inference in downstream projects
-
-Consider **deleting** or updating it if you still need TorchScript export.
-
 ## Pre-trained models
 
 The [original repository releases](https://github.com/Koushik0901/Swift-SRGAN/releases) provide 2x and 4x generators. For 8x, train locally or place a weight file in `weights/`.
-
-## Citation
-
-```bibtex
-@article{krishnan2021swiftsrgan,
-  title={SwiftSRGAN--Rethinking Super-Resolution for Efficient and Real-time Inference},
-  author={Krishnan, Koushik Sivarama and Krishnan, Karthik Sivarama},
-  journal={arXiv preprint arXiv:2111.14320},
-  year={2021}
-}
-```
 
 ## License
 
