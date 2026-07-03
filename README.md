@@ -10,7 +10,7 @@ This fork extends the original training code with **multi-dataset automation**, 
 |------|----------|-----------|
 | Upscale factors | 2x, 4x (8x via manual weights) | First-class **2x, 4x, 8x** training |
 | Datasets | Single local `dataset/` folder | **general** (DF2K), **personalized**, **compound** |
-| Weight files | `swift_srgan_{scale}x.pth` | `{dataset}_{scale}x.pth` (legacy names still load) |
+| Weight files | `original_{scale}x.pth` (upstream) | `{dataset}_{scale}x.pth` (trained) |
 | Training entrypoint | `train.py` only | `run_all_training.py` orchestrates all jobs |
 | Resume | Not supported | `--resume` with corrupt-checkpoint recovery |
 | Artifacts | Kept manually | Auto-cleanup of checkpoints/images after each run |
@@ -73,7 +73,7 @@ personalized_2x.pth  personalized_4x.pth  personalized_8x.pth
 compound_2x.pth      compound_4x.pth      compound_8x.pth
 ```
 
-Legacy names (`swift_srgan_2x.pth`, etc.) are still accepted at inference time as a fallback.
+Legacy upstream weights: `original_2x.pth`, `original_4x.pth`. Trained weights: `general_2x.pth`, `personalized_4x.pth`, etc.
 
 ## Scripts
 
